@@ -8,7 +8,6 @@ defineProps<{
   <button
     :disabled="disabled"
     p="x-6"
-    h="12"
     uppercase
     tracking="wide"
     font="semibold"
