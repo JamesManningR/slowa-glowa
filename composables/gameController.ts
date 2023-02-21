@@ -1,58 +1,62 @@
+import type { MaybeRef } from '@vueuse/shared'
 import { useSensorsStore } from '~~/store/sensors'
 
-export const useGameController = (words: string[]) => {
+export const useGameController = (words: string[], gameLength: MaybeRef<number> = 60) => {
 // Orientation setup
   const sensorsStore = useSensorsStore()
   const orientation = computed(() => sensorsStore.orientation)
 
   // Game state
-  let isPlaying = $ref(false)
-  let index = $ref(0)
-  let correctAnswers = $ref(0)
+  const isPlaying = ref(false)
+  const index = ref(0)
+  const correctAnswers = ref(0)
+  const skippedAnswers = computed(() => index.value - correctAnswers.value)
 
   // Word loading
-  const safeIndex = $computed(() => index % words.length)
-  const currentWord = $computed(() => words[safeIndex])
+  const safeIndex = computed(() => index.value % words.length)
+  const currentWord = computed(() => words[safeIndex.value])
 
-  const nextWord = () => index++
+  const nextWord = () => index.value++
 
-  const incrementScore = () => {
-    correctAnswers++
+  const guessCorrect = () => {
+    correctAnswers.value++
     nextWord()
   }
 
+  const skipWord = () => nextWord()
+
   // Timer
-  let secondsLeft = $ref(60)
+  const secondsLeft = ref(unref(gameLength))
   const { pause: pauseTimer, resume: resumeTimer } = useIntervalFn(() => {
-    secondsLeft--
+    secondsLeft.value--
   }, 1000)
   pauseTimer()
 
-  // PWA controller
-  watch(orientation, (newOrientation) => {
-    if (newOrientation === 'down')
-      incrementScore()
-    else if (newOrientation === 'center')
-      nextWord()
-  })
-
-  // Keyboard controller
-  onKeyStroke('Enter', () => incrementScore())
-  onKeyStroke('Backspace', () => nextWord())
+  const resetGame = () => {
+    isPlaying.value = false
+    secondsLeft.value = unref(gameLength)
+    index.value = 0
+    correctAnswers.value = 0
+    pauseTimer()
+  }
 
   // Game start
   const startGame = () => {
-    isPlaying = true
-    secondsLeft = 60
+    isPlaying.value = true
     resumeTimer()
   }
 
   return {
     isPlaying,
+    resetGame,
     startGame,
     secondsLeft,
     currentWord,
+    // Scoring
     correctAnswers,
+    skippedAnswers,
+    guessCorrect,
+    skipWord,
     orientation,
   }
 }

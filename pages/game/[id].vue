@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useWakeLock } from '@vueuse/core'
+
 import { usePacksStore } from '~~/store/packs'
-import { useGameController } from '~~/store/game'
 
 definePageMeta({
   layout: 'game',
@@ -25,7 +25,17 @@ const currentPack = $computed(() => {
   return pack
 })
 
-const { isPlaying, startGame, secondsLeft, currentWord, correctAnswers } = useGameController(currentPack.words)
+const {
+  isPlaying,
+  startGame,
+  secondsLeft,
+  currentWord,
+  correctAnswers,
+  skippedAnswers,
+  guessCorrect,
+  skipWord,
+  orientation,
+} = useGameController(currentPack.words)
 
 // Setup PWA features
 const { request: wakeLock } = useWakeLock()
@@ -35,38 +45,53 @@ const setupGamePwaFeatures = () => {
   wakeLock('screen')
   enterFullscreen()
 }
+
+const start = () => {
+  startGame()
+  // setupGamePwaFeatures()
+}
+
+// PWA controller
+watch(orientation, (newOrientation) => {
+  if (newOrientation === 'down')
+    guessCorrect()
+  else if (newOrientation === 'center')
+    skipWord()
+})
+
+// Keyboard controller
+onKeyStroke('Enter', () => guessCorrect())
+onKeyStroke('Backspace', () => skipWord())
 </script>
 
 <template>
-  <div flex h-full gap="5">
-    <div v-if="!isPlaying">
-      <AppButton h="100" w="100" text="5xl" @click="startGame">
-        Start Game
-      </AppButton>
-    </div>
+  <main flex h-full w-full gap="5">
+    <template v-if="isPlaying">
+      <GameWord h="full" w="full" :word="currentWord" :orientation="orientation" />
 
-    <GameWord v-else h="full" w="full" :word="currentWord" :orientation="orientation" />
+      <div flex="~ col" gap="4">
+        <div p="4" text="center">
+          <h2>Correct</h2>
+          <p text="3xl bolder">
+            {{ correctAnswers }}
+          </p>
+        </div>
+        <div p="4" text="center">
+          <h2>Incorrect</h2>
+          <p text="3xl bolder">
+            {{ skippedAnswers }}
+          </p>
+        </div>
+        <div p="4" text="center">
+          <Clock tag="p" :seconds="secondsLeft" text="3xl bolder" />
+        </div>
+      </div>
+    </template>
 
-    <div flex="~ col" gap="4">
-      <div p="4" text="center">
-        <h2>Correct</h2>
-        <p text="3xl bolder">
-          {{ correctAnswers }}
-        </p>
-      </div>
-      <div p="4" text="center">
-        <h2>Incorrect</h2>
-        <p text="3xl bolder">
-          {{ index - correctAnswers }}
-        </p>
-      </div>
-      <div p="4" text="center">
-        <p text="3xl bolder">
-          {{ clockDisplay }}
-        </p>
-      </div>
-    </div>
-  </div>
+    <AppButton v-else p="4" text="5xl" place-self="center" @click="start">
+      Start Game
+    </AppButton>
+  </main>
 </template>
 
 <style scoped>
