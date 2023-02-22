@@ -10,12 +10,15 @@ const formatted = $computed(() => {
   const minutes = Math.floor(props.seconds / 60)
   const seconds = props.seconds % 60
 
-  return `${minutes}:${seconds}`
+  const minutesString = minutes.toString().padStart(2, '0')
+  const secondsString = seconds.toString().padStart(2, '0')
+
+  return `${minutesString}:${secondsString}`
 })
 </script>
 
 <template>
   <component :is="tag">
-    {{ formatted }}}
+    {{ formatted }}
   </component>
 </template>
