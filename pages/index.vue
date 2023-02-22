@@ -7,7 +7,7 @@ const currentUser = $computed(() => packsStore.currentUser)
 </script>
 
 <template>
-  <div flex justify="center" align="center" h="full" w="full">
+  <main flex justify="center" align="center" h="full" w="full">
     <PermissionsIos />
 
     <template v-if="currentUser">
@@ -17,5 +17,5 @@ const currentUser = $computed(() => packsStore.currentUser)
     <template v-else>
       <AuthAccount />
     </template>
-  </div>
+  </main>
 </template>
