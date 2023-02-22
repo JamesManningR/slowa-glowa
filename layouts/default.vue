@@ -1,9 +1,7 @@
 <template>
   <div max-h="screen">
     <AppHeader />
-    <main>
-      <slot />
-    </main>
+    <slot />
     <AppFooter />
   </div>
 </template>

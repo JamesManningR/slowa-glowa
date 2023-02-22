@@ -65,43 +65,31 @@ onKeyStroke('Backspace', () => skipWord())
 </script>
 
 <template>
-  <main flex h-full w-full gap="5">
-    <template v-if="isPlaying">
-      <GameWord h="full" w="full" :word="currentWord" :orientation="orientation" />
+  <main v-if="isPlaying" flex h="full" gap="5">
+    <GameWord h="full" flex-grow :word="currentWord" :orientation="orientation" />
 
-      <div flex="~ col" gap="4">
-        <div p="4" text="center">
-          <h2>Correct</h2>
-          <p text="3xl bolder">
-            {{ correctAnswers }}
-          </p>
-        </div>
-        <div p="4" text="center">
-          <h2>Incorrect</h2>
-          <p text="3xl bolder">
-            {{ skippedAnswers }}
-          </p>
-        </div>
-        <div p="4" text="center">
-          <Clock tag="p" :seconds="secondsLeft" text="3xl bolder" />
-        </div>
+    <div flex="~ col" gap="4">
+      <div p="4" text="center">
+        <h2>Correct</h2>
+        <p text="3xl bolder">
+          {{ correctAnswers }}
+        </p>
       </div>
-    </template>
+      <div p="4" text="center">
+        <h2>Incorrect</h2>
+        <p text="3xl bolder">
+          {{ skippedAnswers }}
+        </p>
+      </div>
+      <div p="4" text="center">
+        <Clock tag="p" :seconds="secondsLeft" text="3xl bolder" />
+      </div>
+    </div>
+  </main>
 
-    <AppButton v-else p="4" text="5xl" place-self="center" @click="start">
+  <main v-else flex justify="center" items="center" h="full">
+    <AppButton p="12" text="5xl" @click="start">
       Start Game
     </AppButton>
   </main>
 </template>
-
-<style scoped>
-@keyframes slide {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-100%);
-  }
-}
-</style>
