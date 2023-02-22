@@ -6,18 +6,18 @@ const props = defineProps<{
 
 const color = computed(() => {
   if (props.orientation === 'up')
-    return 'bg-orange-500'
+    return 'bg-orange-600'
 
   else if (props.orientation === 'down')
-    return 'bg-green-500'
+    return 'bg-green-600'
 
   else
-    return 'bg-blue-500'
+    return 'bg-blue-600'
 })
 </script>
 
 <template>
-  <div :class="color" flex p="4" border="5 white" rounded-2xl items="center" justify="center">
+  <div :class="color" flex="~" justify="center" items="center" p="4" border="5 white" rounded="2xl">
     <h2 text="6xl">
       {{ word }}
     </h2>
