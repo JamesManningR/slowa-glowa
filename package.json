@@ -10,20 +10,20 @@
     "generate": "nuxi generate"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.35.2",
+    "@antfu/eslint-config": "^0.37.0",
     "@nuxtjs/color-mode": "^3.2.0",
-    "@pinia/nuxt": "^0.4.6",
-    "@unocss/nuxt": "^0.49.4",
-    "@vueuse/nuxt": "^9.12.0",
-    "eslint": "^8.34.0",
-    "nuxt": "^3.2.0",
-    "nuxt-icon": "^0.3.2",
-    "pinia": "^2.0.30",
+    "@pinia/nuxt": "^0.4.7",
+    "@unocss/nuxt": "^0.50.6",
+    "@vueuse/nuxt": "^9.13.0",
+    "eslint": "^8.36.0",
+    "nuxt": "^3.3.1",
+    "nuxt-icon": "^0.3.3",
+    "pinia": "^2.0.33",
     "tailwindcss-safe-area": "^0.2.2",
-    "typescript": "^4.9.5"
+    "typescript": "^5.0.2"
   },
   "dependencies": {
-    "@iconify-json/fluent-emoji-flat": "^1.1.9",
-    "pocketbase": "^0.10.2"
+    "@iconify-json/fluent-emoji-flat": "^1.1.10",
+    "pocketbase": "^0.12.1"
   }
 }
