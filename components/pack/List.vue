@@ -17,22 +17,13 @@ if (packs.length === 0)
     <li>
       <NuxtLink
         to="/create"
-        flex="~ col"
-        justify="center"
-        items="center"
-        gap="1"
+        class="card card-bordered"
         w="50"
         h="65"
-        p="10"
-        bg="green-600 hover:green-800"
-        transition="background-color transform"
-        transform="hover:scale-110"
-        z-index="hover:10"
-        border="white 5"
-        rounded="xl"
-        text-3xl
-        text-white
-        text-center
+        bg="success"
+        shadow="md hover:lg"
+        scale="hover:105"
+        transition="transform shadow"
       >
         Create
         <Icon name="mdi-plus-circle" />
