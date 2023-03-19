@@ -8,7 +8,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
-import {presetDaisy} from 'unocss-preset-daisy'
+import { presetDaisy } from 'unocss-preset-daisy'
 
 export default defineConfig({
   rules: [
