@@ -35,7 +35,7 @@ const {
   guessCorrect,
   skipWord,
   orientation,
-} = useGameController(currentPack.words)
+} = useGameController(currentPack.words, 120)
 
 // Setup PWA features
 const { request: wakeLock } = useWakeLock()
@@ -88,7 +88,7 @@ onKeyStroke('Backspace', () => skipWord())
   </main>
 
   <main v-else flex justify="center" items="center" h="full">
-    <button class="btn" p="12" text="5xl" @click="start">
+    <button class="btn btn-primary btn-lg" text="3xl" @click="start">
       Start Game
     </button>
   </main>
