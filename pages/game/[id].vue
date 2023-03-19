@@ -3,6 +3,8 @@ import { useWakeLock } from '@vueuse/core'
 
 import { usePacksStore } from '~~/store/packs'
 
+import Flipper from '~~/components/clock/Flipper.vue'
+
 definePageMeta({
   layout: 'game',
 })
@@ -70,16 +72,10 @@ onKeyStroke('Backspace', () => skipWord())
 
     <div flex="~ col" gap="4">
       <div p="4" text="center">
-        <h2>Correct</h2>
-        <p text="3xl bolder">
-          {{ correctAnswers }}
-        </p>
+        <Flipper tag="p" :value="correctAnswers" label="Correct" text="3xl bolder" />
       </div>
       <div p="4" text="center">
-        <h2>Incorrect</h2>
-        <p text="3xl bolder">
-          {{ skippedAnswers }}
-        </p>
+        <Flipper tag="p" :value="skippedAnswers" label="Skipped" text="3xl bolder" />
       </div>
       <div p="4" text="center">
         <Clock tag="p" :seconds="secondsLeft" text="3xl bolder" />
