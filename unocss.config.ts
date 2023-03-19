@@ -8,6 +8,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
+import {presetDaisy} from 'unocss-preset-daisy'
 
 export default defineConfig({
   rules: [
@@ -23,6 +24,7 @@ export default defineConfig({
   ],
   presets: [
     presetUno(),
+    presetDaisy(),
     presetAttributify(),
     presetIcons({
       scale: 1.2,

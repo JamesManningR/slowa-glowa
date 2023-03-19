@@ -7,14 +7,14 @@ const tab = $ref<Tab>('signin')
 <template>
   <ul>
     <li>
-      <AppButton @click="tab = 'signin'">
+      <button class="btn" @click="tab = 'signin'">
         Signin
-      </AppButton>
+      </button>
     </li>
     <li>
-      <AppButton @click="tab = 'register'">
+      <button class="btn" @click="tab = 'register'">
         Register
-      </AppButton>
+      </button>
     </li>
   </ul>
   <AuthSignin v-if="tab === 'signin'" />

@@ -21,34 +21,34 @@ const handleSubmit = () => {
     <div p="8">
       <div text="left" flex="~ col" m="b-8">
         <label for="username">Username</label>
-        <AppInput
+        <input
           id="username"
           v-model="username"
+          class="form-control"
           type="text"
           name="username"
           placeholder="Username"
           m="b-2"
-        />
+        >
 
         <label for="password">Password</label>
-        <AppInput
+        <input
           id="password"
           v-model="password"
+          class="form-control"
           type="password"
           name="password"
           placeholder="*********"
-        />
+        >
       </div>
 
-      <AppButton
+      <button
         type="submit"
-        bg="teal-400 hover:teal-500"
-        text="black"
-        border="black"
+        class="btn"
         m="safe"
       >
         Sign in
-      </AppButton>
+      </button>
     </div>
   </form>
 </template>

@@ -24,6 +24,9 @@
   },
   "dependencies": {
     "@iconify-json/fluent-emoji-flat": "^1.1.10",
-    "pocketbase": "^0.12.1"
+    "@kidonng/daisyui": "^2.51.3",
+    "daisyui": "^2.51.4",
+    "pocketbase": "^0.12.1",
+    "unocss-preset-daisy": "^2.0.0"
   }
 }

@@ -28,27 +28,29 @@ const handleSubmit = () => {
     <div p="8">
       <div text="left" flex="~ col" m="b-8">
         <label for="email">Email</label>
-        <AppInput id="email" v-model="email" type="email" name="email" placeholder="Email" m="b-2" />
+        <input id="email" v-model="email" class="form-control" type="email" name="email" placeholder="Email" m="b-2">
 
         <label for="username">Username</label>
-        <AppInput id="username" v-model="username" type="text" name="email" placeholder="Username" m="b-2" />
+        <input id="username" v-model="username" class="form-control" type="text" name="email" placeholder="Username" m="b-2">
 
         <label for="password">Password</label>
-        <AppInput id="password" v-model="password" type="password" name="password" placeholder="*********" />
+        <input id="password" v-model="password" class="form-control" type="password" name="password" placeholder="*********">
 
         <label for="confirmPassword">Confirm Password</label>
-        <AppInput
-          id="confirmPassword" v-model="confirmPassword" type="password" name="password"
+        <input
+          id="confirmPassword"
+          v-model="confirmPassword" class="form-control" type="password" name="password"
           placeholder="*********"
-        />
+        >
       </div>
 
-      <AppButton
-        type="submit" :disabled="!matchingPasswords" bg="teal-400 hover:teal-500" text="black" border="black"
+      <button
+        class="btn"
+        type="submit" :disabled="!matchingPasswords"
         m="safe" opacity="disabled:75"
       >
         Register
-      </AppButton>
+      </button>
     </div>
   </form>
 </template>

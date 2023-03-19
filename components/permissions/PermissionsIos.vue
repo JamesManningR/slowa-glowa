@@ -9,7 +9,7 @@ const getPermission = () => sensorsStore.getPermission()
 </script>
 
 <template>
-  <AppButton v-if="isIOS && !hasPermission" bg="blue-600" @click="getPermission()">
+  <btn v-if="isIOS && !hasPermission" class="btn" @click="getPermission()">
     Grant Access
-  </AppButton>
+  </btn>
 </template>

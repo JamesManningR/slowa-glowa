@@ -88,8 +88,8 @@ onKeyStroke('Backspace', () => skipWord())
   </main>
 
   <main v-else flex justify="center" items="center" h="full">
-    <AppButton p="12" text="5xl" @click="start">
+    <button class="btn" p="12" text="5xl" @click="start">
       Start Game
-    </AppButton>
+    </button>
   </main>
 </template>
