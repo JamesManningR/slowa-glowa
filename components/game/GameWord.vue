@@ -1,23 +1,26 @@
 <script setup lang="ts">
 const props = defineProps<{
   word: string
-  orientation: 'up' | 'down'
+  orientation?: 'up' | 'down'
 }>()
 
-const color = computed(() => {
+const classes = computed(() => {
+  if (!props.orientation)
+    return 'bg-primary text-primary-content'
+
   if (props.orientation === 'up')
-    return 'bg-orange-600'
+    return 'bg-error text-error-content'
 
   else if (props.orientation === 'down')
-    return 'bg-green-600'
+    return 'bg-success text-success-content'
 
   else
-    return 'bg-blue-600'
+    return 'bg-primary text-primary-content'
 })
 </script>
 
 <template>
-  <div :class="color" flex="~" justify="center" items="center" p="4" border="5 white" rounded="2xl">
+  <div :class="classes" flex="~" justify="center" items="center" p="4" border="5 white" rounded="2xl">
     <h2 text="6xl">
       {{ word }}
     </h2>
