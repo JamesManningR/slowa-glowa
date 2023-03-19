@@ -2,36 +2,46 @@
 const name = $ref('')
 
 let newWord = $ref('')
-const words = $ref([])
+const words = $ref<string[]>([])
 
 const addWord = () => {
   words.push(newWord)
   newWord = ''
 }
+
+const removeWord = (index: number) => {
+  words.splice(index, 1)
+}
 </script>
 
 <template>
   <main>
-    <form>
+    <form @submit.prevent>
       <h1>Create Pack</h1>
 
-      <label for="name">Name</label>
-      <AppInput id="name" v-model="name" type="text" />
+      <div class="form-control">
+        <label for="name">Name</label>
+        <input id="name" v-model="name" class="input" type="text">
+      </div>
 
-      <label for="add-word">Add Word</label>
-      <AppInput id="add-word" v-model="newWord" type="text" />
-      <AppButton @click.prevent="addWord">
-        Add
-      </AppButton>
+      <div class="form-control">
+        <label for="add-word">Add Word</label>
+        <div class="input-group">
+          <input id="add-word" v-model="newWord" class="input" type="text">
+          <button class="btn btn-primary" @click.prevent="addWord">
+            Add
+          </button>
+        </div>
+      </div>
 
       <h2>Words</h2>
 
       <ul>
-        <li v-for="(word, index) in words" :key="word">
-          <AppInput v-model="words[index]" />
-          <AppButton class="bg-red-500 hover:bg-red-800">
+        <li v-for="(word, index) in words" :key="word" flex gap="2" m="b-2">
+          <input v-model.lazy="words[index]" class="input">
+          <button class="btn btn-error" @click.prevent="removeWord(index)">
             <Icon name="mdi-trash-can" />
-          </AppButton>
+          </button>
         </li>
       </ul>
     </form>
