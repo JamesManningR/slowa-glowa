@@ -1,22 +1,31 @@
 <script setup lang="ts">
 type Tab = 'signin' | 'register'
 
-const tab = $ref<Tab>('signin')
+const activeTab = $ref<Tab>('signin')
+
+const tabs = [
+  { name: 'signin', label: 'Signin' },
+  { name: 'register', label: 'Register' },
+] as {
+  name: Tab
+  label: string
+}[]
 </script>
 
 <template>
-  <ul>
-    <li>
-      <button class="btn" @click="tab = 'signin'">
-        Signin
-      </button>
-    </li>
-    <li>
-      <button class="btn" @click="tab = 'register'">
-        Register
-      </button>
-    </li>
-  </ul>
-  <AuthSignin v-if="tab === 'signin'" />
-  <AuthRegister v-else-if="tab === 'register'" />
+  <div class="flex flex-col">
+    <ul class="tabs">
+      <li
+        v-for="tabItem in tabs"
+        :key="tabItem.name"
+        class="tab tab-lifted"
+        :class="{ 'tab-active': activeTab === tabItem.name }"
+        @click="activeTab = tabItem.name"
+      >
+        {{ tabItem.label }}
+      </li>
+    </ul>
+    <AuthSignin v-if="activeTab === 'signin'" />
+    <AuthRegister v-else-if="activeTab === 'register'" />
+  </div>
 </template>

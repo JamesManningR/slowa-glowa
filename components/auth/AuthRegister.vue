@@ -9,43 +9,57 @@ const confirmPassword = $ref('')
 
 const matchingPasswords = computed(() => password === confirmPassword)
 
-const handleSubmit = () => {
+let isLoading = $ref(false)
+
+const handleSubmit = async () => {
   if (!matchingPasswords)
     return
 
-  packsStore.register(email, username, password, confirmPassword)
+  isLoading = true
+  await packsStore.register(email, username, password, confirmPassword)
+
+  isLoading = false
 }
 </script>
 
 <template>
-  <form flex flex-col items="center" justify="center" text="gray-800" bg="gray-200" @submit.prevent="handleSubmit()">
-    <div bg="black" text="white" w="full" p="4">
+  <form flex flex-col items="center" justify="center" :aria-busy="isLoading" @submit.prevent="handleSubmit()">
+    <header bg="base-100" text="base-content" w="full" p="4">
       <h2 text="4xl">
         Register
       </h2>
-    </div>
+    </header>
 
-    <div p="8">
+    <div bg="neutral" text="neutral-content" p="8">
       <div text="left" flex="~ col" m="b-8">
-        <label for="email">Email</label>
-        <input id="email" v-model="email" class="form-control" type="email" name="email" placeholder="Email" m="b-2">
+        <div class="form-control">
+          <label for="email">Email</label>
+          <input id="email" v-model="email" class="input" type="email" name="email" placeholder="Email" m="b-2">
+        </div>
 
-        <label for="username">Username</label>
-        <input id="username" v-model="username" class="form-control" type="text" name="email" placeholder="Username" m="b-2">
+        <div class="form-control">
+          <label for="username">Username</label>
+          <input id="username" v-model="username" class="input" type="text" name="email" placeholder="Username" m="b-2">
+        </div>
 
-        <label for="password">Password</label>
-        <input id="password" v-model="password" class="form-control" type="password" name="password" placeholder="*********">
+        <div class="form-control">
+          <label for="password">Password</label>
+          <input id="password" v-model="password" class="input" type="password" name="password" placeholder="*********">
+        </div>
 
-        <label for="confirmPassword">Confirm Password</label>
-        <input
-          id="confirmPassword"
-          v-model="confirmPassword" class="form-control" type="password" name="password"
-          placeholder="*********"
-        >
+        <div class="form-control">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            id="confirmPassword"
+            v-model="confirmPassword" class="input" type="password" name="password"
+            placeholder="*********"
+          >
+        </div>
       </div>
 
       <button
-        class="btn"
+        class="btn btn-primary"
+        :class="{ loading: isLoading }"
         type="submit" :disabled="!matchingPasswords"
         m="safe" opacity="disabled:75"
       >
