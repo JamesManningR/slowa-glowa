@@ -12,21 +12,25 @@ if (packs.length === 0)
 <template>
   <ul flex gap="4">
     <li v-for="pack in packs" :key="pack.name">
-      <PackPreview :pack="pack" />
+      <NuxtLink
+        :to="`/game/${pack.name}`"
+      >
+        <PackPreview
+          bg="primary"
+          text="primary-content"
+        >
+          {{ pack.name }}
+        </PackPreview>
+      </NuxtLink>
     </li>
     <li>
       <NuxtLink
         to="/create"
-        class="card card-bordered"
-        w="50"
-        h="65"
-        bg="success"
-        shadow="md hover:lg"
-        scale="hover:105"
-        transition="transform shadow"
       >
-        Create
-        <Icon name="mdi-plus-circle" />
+        <PackPreview bg="success" text="success-content">
+          Create
+          <Icon name="mdi-plus-circle" />
+        </PackPreview>
       </NuxtLink>
     </li>
   </ul>
