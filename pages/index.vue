@@ -2,7 +2,6 @@
 import { usePacksStore } from '~~/store/packs'
 
 const packsStore = usePacksStore()
-const packs = $computed(() => packsStore.packs)
 const currentUser = $computed(() => packsStore.currentUser)
 </script>
 
@@ -11,7 +10,15 @@ const currentUser = $computed(() => packsStore.currentUser)
     <PermissionsIos />
 
     <template v-if="currentUser">
-      <PackList />
+      <Suspense>
+        <template #default>
+          <PackList />
+        </template>
+
+        <template #fallback>
+          <Icon name="mdi-loading" animate="spin" />
+        </template>
+      </Suspense>
     </template>
 
     <template v-else>
