@@ -19,13 +19,10 @@ const logout = () => packsStore.logout()
       flex
       gap="3"
     >
-      <ul>
+      <!-- <ul>
         <li>
-          <NuxtLink to="/game/123">
-            Game
-          </NuxtLink>
         </li>
-      </ul>
+      </ul> -->
 
       <button v-if="isLoggedIn" @click="logout">
         Sign out
